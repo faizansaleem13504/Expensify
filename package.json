@@ -27,6 +27,7 @@
     "moment": "2.18.1",
     "node-sass": "6.0.1",
     "normalize.css": "7.0.0",
+    "numeral": "2.0.6",
     "react": "16.0.0",
     "react-addons-shallow-compare": "15.6.0",
     "react-datepicker": "^4.2.1",
@@ -41,12 +42,10 @@
     "uuid": "3.1.0",
     "validator": "8.0.0",
     "webpack": "3.1.0"
-    
   },
   "devDependencies": {
-    "live-server": "1.2.1",
     "jest": "20.0.4",
+    "live-server": "1.2.1",
     "webpack-dev-server": "2.5.1"
-    
   }
 }
