@@ -10,16 +10,18 @@ import visibleExpenses from "./selectors/expenses"
 import { Provider } from "react-redux";
 import moment from "moment";
 import getTotalSum from "./selectors/expense-total";
+import "./firebase/firebase"
+import "./playground/promises"
 
 const store=configureStore();
-console.log(store.getState());
-store.dispatch(addExpense({amount:15000,desc:"Water Bill", createdAt:moment().add(4,"days")}))
-store.dispatch(addExpense({desc:"Gas Bill", amount:6000}))
-store.dispatch(addExpense({desc:"Rent", amount:1200,createdAt:moment()}))
-const state=store.getState();
+//console.log(store.getState());
+//store.dispatch(addExpense({amount:15000,desc:"Water Bill", createdAt:moment().add(4,"days")}))
+//store.dispatch(addExpense({desc:"Gas Bill", amount:6000}))
+//store.dispatch(addExpense({desc:"Rent", amount:1200,createdAt:moment()}))
+//const state=store.getState();
 
-const visibleExpensesList=visibleExpenses(state.expenses, state.filters)
-console.log(getTotalSum(visibleExpensesList));
+//const visibleExpensesList=visibleExpenses(state.expenses, state.filters)
+//console.log(getTotalSum(visibleExpensesList));
 
 
 const jsx=(
