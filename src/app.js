@@ -12,6 +12,7 @@ import moment from "moment";
 import getTotalSum from "./selectors/expense-total";
 import "./firebase/firebase"
 import "./playground/promises"
+import { startSetExpenses } from "./actions/expenses";
 
 const store=configureStore();
 //console.log(store.getState());
@@ -22,11 +23,14 @@ const store=configureStore();
 
 //const visibleExpensesList=visibleExpenses(state.expenses, state.filters)
 //console.log(getTotalSum(visibleExpensesList));
-
-
 const jsx=(
     <Provider store={store}>
         <AppRouter/>
     </Provider>
 )
-ReactDOM.render(jsx, document.getElementById("appRoot"));
+store.dispatch(startSetExpenses()).then(()=>{
+    ReactDOM.render(jsx, document.getElementById("appRoot"));
+});
+
+
+

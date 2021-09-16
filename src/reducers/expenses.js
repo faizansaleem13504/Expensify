@@ -21,6 +21,9 @@ const expensesReducer=(state=[], action)=>{
                     return item;
                 }
             })
+        case "SET_EXPENSES":
+            console.log("hello",action.expenses);
+            return action.expenses;
 
         default:
             return state;
