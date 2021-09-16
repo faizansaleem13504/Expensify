@@ -29,7 +29,6 @@ export const startAddExpense=(expenseData={})=>{
 }
 
 export const removeExpense=({id}={})=>{
-    console.log(id)
     return (
     
     {
@@ -37,6 +36,14 @@ export const removeExpense=({id}={})=>{
         id
     }
 )
+}
+export const startRemoveExpense=({id}={})=>{
+    return (dispatch)=>{
+        return database.ref(`expenses/${id}`).remove().then(()=>{
+            console.log("removed from firebase")
+            dispatch(removeExpense({id}))
+        })
+    }
 }
 export const editExpense=(id, updates)=>{
 return (
@@ -46,6 +53,18 @@ return (
         updates
     }
 )
+}
+export const startEditExpense=(id,updates)=>{
+    console.log("start edit expense",id,updates);
+    return (dispatch)=>{
+        
+        return database.ref(`expenses/${id}`).update({
+            id,
+            ...updates
+        }).then(()=>{
+            dispatch(editExpense(id,updates));
+        })
+    }
 }
 export const setExpenses=(expenses)=>{
     return (
