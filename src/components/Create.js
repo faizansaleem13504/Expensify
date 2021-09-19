@@ -9,7 +9,7 @@ import { connect } from "react-redux";
       <ExpenseForm onSubmit={(expense)=>{
         console.log(props)
         props.dispatch(startAddExpense(expense))
-        props.history.push('/')
+        props.history.push('/dashboard')
       }
       }/>
     </div>

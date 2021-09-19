@@ -1,20 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "normalize.css";
-import AppRouter from "./routers/AppRouter";
+import AppRouter,{history} from "./routers/AppRouter";
 import "./styles/styles.scss";
 import configureStore from "./store/configureStore";
-import {addExpense} from "./actions/expenses";
+import {login,logout} from "./actions/auth";
 import {setTextFilter} from "./actions/filters"
 import visibleExpenses from "./selectors/expenses"
 import { Provider } from "react-redux";
-import moment from "moment";
-import getTotalSum from "./selectors/expense-total";
 import "./firebase/firebase"
-import "./playground/promises"
+import "./playground/promises";
 import { startSetExpenses } from "./actions/expenses";
-
+import {firebase} from "./firebase/firebase";
 const store=configureStore();
+
 //console.log(store.getState());
 //store.dispatch(addExpense({amount:15000,desc:"Water Bill", createdAt:moment().add(4,"days")}))
 //store.dispatch(addExpense({desc:"Gas Bill", amount:6000}))
@@ -28,9 +27,30 @@ const jsx=(
         <AppRouter/>
     </Provider>
 )
-store.dispatch(startSetExpenses()).then(()=>{
-    ReactDOM.render(jsx, document.getElementById("appRoot"));
-});
 
+let isRendered=false;
+const renderApp=()=>{
+    if(!isRendered){
+        ReactDOM.render(jsx, document.getElementById("appRoot"));
+        isRendered=true;
+    }
+}
 
+firebase.auth().onAuthStateChanged((user)=>{
+    console.log(this)
+    if(user){
+        store.dispatch(login(user.uid));
+        store.dispatch(startSetExpenses()).then(()=>{
+           renderApp();
+           if(history.location.pathname="/")
+            history.push("/dashboard")
+        });
+        console.log("logged in");
+    }
+    else{
+        store.dispatch(logout());
+        ReactDOM.render(jsx, document.getElementById("appRoot"));
+        history.push("/")
+    }
+})
 

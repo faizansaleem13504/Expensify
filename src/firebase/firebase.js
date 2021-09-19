@@ -5,22 +5,24 @@ import * as firebase from "firebase";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAnIB2jP7Y78bGIofrIN-vO84G3ep8Tvc8",
+apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "expensify-b7171.firebaseapp.com",
   databaseURL: "https://expensify-b7171-default-rtdb.firebaseio.com",
   projectId: "expensify-b7171",
   storageBucket: "expensify-b7171.appspot.com",
   messagingSenderId: "684944952542",
-  appId: "1:684944952542:web:61e01daca8b341dd21064f"
+  appId: "1:684944952542:web:61e01daca8b341dd21064f"  
 };
 
 
 const app = firebase.initializeApp(firebaseConfig);
 const database=firebase.database();
-export {firebase, database as default};
+const googleAuthProvider=new firebase.auth.GoogleAuthProvider()
+export {firebase,googleAuthProvider, database as default};
 database.ref("expenses").on("child_changed",(snapshot)=>{
     console.log(snapshot.key,snapshot.val())
 })
+
 /*database.ref("expenses").on("value",(snapshot)=>{
     const expenses=[];
     snapshot.forEach((expense)=>{
