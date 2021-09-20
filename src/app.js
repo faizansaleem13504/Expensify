@@ -12,6 +12,7 @@ import "./firebase/firebase"
 import "./playground/promises";
 import { startSetExpenses } from "./actions/expenses";
 import {firebase} from "./firebase/firebase";
+import LandingPage from "./components/LandingPage"
 const store=configureStore();
 
 //console.log(store.getState());
@@ -22,6 +23,7 @@ const store=configureStore();
 
 //const visibleExpensesList=visibleExpenses(state.expenses, state.filters)
 //console.log(getTotalSum(visibleExpensesList));
+ReactDOM.render(<LandingPage/>, document.getElementById("appRoot"));
 const jsx=(
     <Provider store={store}>
         <AppRouter/>
@@ -37,7 +39,6 @@ const renderApp=()=>{
 }
 
 firebase.auth().onAuthStateChanged((user)=>{
-    console.log(this)
     if(user){
         store.dispatch(login(user.uid));
         store.dispatch(startSetExpenses()).then(()=>{

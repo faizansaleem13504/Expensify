@@ -8,6 +8,12 @@ const Edit = (props) => {
   console.log(props);
   return (
     <div>
+      <div className="page-header">
+            <div className="content-container">
+            <h1 className="page-header__title">Edit Expense</h1>
+            </div>
+      </div>
+       <div className="content-container">
       <ExpenseForm expense={props.expense} onSubmit={
         (expense)=>{
           console.log(expense);
@@ -15,10 +21,12 @@ const Edit = (props) => {
           props.history.push("/")
         }
       }/>
-      <button onClick={(e)=>{
+      <button className="button button__remove" onClick={(e)=>{
         props.dispatch(startRemoveExpense({id:props.expense.id}));
         props.history.push("/")
-    }}>Remove</button>
+    }}>Remove Expense</button>
+      </div>
+      
     </div>
   );
 };

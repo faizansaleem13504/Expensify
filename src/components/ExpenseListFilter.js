@@ -18,12 +18,21 @@ class ExpenseListFilter extends React.Component{
     ) 
     render(props){
         return (
-        <div>
-            <input type="text" name="textField" value={this.props.filters.text} onChange={((e)=>{
+        <div className="content-container">
+            <div className="filter-list">
+                <div className="filter-list__item">
+                    <input className="text-input" 
+                    placeholder="Select Expenses"
+                    type="text" 
+                    name="textField" 
+                    value={this.props.filters.text} 
+                    onChange={((e)=>{
                 this.props.dispatch(setTextFilter(e.target.value))
-            })}
-            />
-            <select value={this.props.filters.sortBy} onChange={((e)=>{
+                })}
+                />
+                </div>
+                <div className="filter-list__item">
+                <select className="text-input" value={this.props.filters.sortBy} onChange={((e)=>{
                 if(e.target.value==="date"){
                     this.props.dispatch(sortByDate())
                 }
@@ -34,8 +43,10 @@ class ExpenseListFilter extends React.Component{
             })}>
                 <option value="date">Date</option>
                 <option value="amount">Amount</option>
-            </select>
-            <DateRangePicker
+            </select >
+                </div>
+                <div className="filter-list__item">
+                <DateRangePicker
                 startDate={this.props.filters.startDate}
                 endDate={this.props.filters.endDate}
                 onDatesChange={this.onDatesChange}
@@ -45,6 +56,11 @@ class ExpenseListFilter extends React.Component{
                 isOutsideRange={()=>(false)}
 
             />
+                </div>
+            </div>
+            
+            
+           
     
         </div>
     )
